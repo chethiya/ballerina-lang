@@ -60,11 +60,10 @@ public type Min object {
                 return self.iMin;
             } else if (eventType == "EXPIRED"){
                 self.iMinQueue.resetToFront();
-                while (self.iMinQueue.hasNext()) {
+                if (self.iMinQueue.hasNext()) {
                     int a = <int>self.iMinQueue.next();
                     if (a == value) {
                         self.iMinQueue.removeCurrent();
-                        break;
                     }
                 }
                 self.iMin = <int>self.iMinQueue.getFirst();
@@ -95,11 +94,12 @@ public type Min object {
                 return self.fMin;
             } else if (eventType == "EXPIRED") {
                 self.fMinQueue.resetToFront();
-                while (self.fMinQueue.hasNext()) {
+                if (self.fMinQueue.hasNext()) {
                     float a = <float>self.fMinQueue.next();
+
+                    // Not sure how reliable float equality comparison here!
                     if (a == value) {
                         self.fMinQueue.removeCurrent();
-                        break;
                     }
                 }
                 self.fMin = <float>self.fMinQueue.getFirst();

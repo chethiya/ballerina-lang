@@ -61,11 +61,10 @@ public type Max object {
                 return self.iMax;
             } else if (eventType == "EXPIRED"){
                 self.iMaxQueue.resetToFront();
-                while (self.iMaxQueue.hasNext()) {
+                if (self.iMaxQueue.hasNext()) {
                     int a = <int>self.iMaxQueue.next();
                     if (a == value) {
                         self.iMaxQueue.removeCurrent();
-                        break;
                     }
                 }
                 self.iMax = <int>self.iMaxQueue.getFirst();
@@ -97,11 +96,12 @@ public type Max object {
                 return self.fMax;
             } else if (eventType == "EXPIRED"){
                 self.fMaxQueue.resetToFront();
-                while (self.fMaxQueue.hasNext()) {
+                if (self.fMaxQueue.hasNext()) {
                     float a = <float>self.fMaxQueue.next();
+
+                    // Not sure how reliable float equality comparison here!
                     if (a == value) {
                         self.fMaxQueue.removeCurrent();
-                        break;
                     }
                 }
                 self.fMax = <float>self.fMaxQueue.getFirst();
